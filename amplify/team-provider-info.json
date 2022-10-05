@@ -1,26 +1,37 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-inmoby-dev-143926-authRole",
-            "UnauthRoleArn": "arn:aws:iam::871174821634:role/amplify-inmoby-dev-143926-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::871174821634:role/amplify-inmoby-dev-143926-authRole",
-            "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-inmoby-dev-143926-deployment",
-            "UnauthRoleName": "amplify-inmoby-dev-143926-unauthRole",
-            "StackName": "amplify-inmoby-dev-143926",
-            "StackId": "arn:aws:cloudformation:us-east-1:871174821634:stack/amplify-inmoby-dev-143926/6e075fd0-44e5-11ed-8f58-0a0fd310e92d",
-            "AmplifyAppId": "d3enydrsher5h0"
-        },
-        "categories": {
-            "auth": {
-                "inmoby63dcaeb0": {}
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d3enydrsher5h0",
-                    "type": "cicd"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-inmoby-dev-143926-authRole",
+      "UnauthRoleArn": "arn:aws:iam::871174821634:role/amplify-inmoby-dev-143926-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::871174821634:role/amplify-inmoby-dev-143926-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-inmoby-dev-143926-deployment",
+      "UnauthRoleName": "amplify-inmoby-dev-143926-unauthRole",
+      "StackName": "amplify-inmoby-dev-143926",
+      "StackId": "arn:aws:cloudformation:us-east-1:871174821634:stack/amplify-inmoby-dev-143926/6e075fd0-44e5-11ed-8f58-0a0fd310e92d",
+      "AmplifyAppId": "d3enydrsher5h0",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-inmoby-dev-143926-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "auth": {
+        "inmoby63dcaeb0": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3enydrsher5h0",
+          "type": "cicd"
         }
+      },
+      "function": {
+        "backend": {
+          "deploymentBucketName": "amplify-inmoby-dev-143926-deployment",
+          "s3Key": "amplify-builds/backend-367a6e72306472397472-build.zip"
+        },
+        "inmobydependencies": {
+          "deploymentBucketName": "amplify-inmoby-dev-143926-deployment",
+          "s3Key": "amplify-builds/inmobydependencies-LambdaLayerVersion442f9bae-build.zip"
+        }
+      }
     }
+  }
 }
