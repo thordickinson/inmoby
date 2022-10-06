@@ -1,18 +1,38 @@
+const { isAWSRuntime } = require('./util/aws')
+const isAws = isAWSRuntime()
+require('dotenv').config()
+
+const awsServerlessExpress = require('aws-serverless-express')
+const { server } = require("./server")
+const log4js = require('log4js')
+const dbConnect = require('./util/dbConnect')
+const logger = log4js.getLogger("index")
 
 
 
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
-exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-    return {
-        statusCode: 200,
-        //  Uncomment below to enable CORS requests
-        //  headers: {
-        //      "Access-Control-Allow-Origin": "*",
-        //      "Access-Control-Allow-Headers": "*"
-        //  }, 
-        body: JSON.stringify('Hello from Lambda!'),
-    };
-};
+function loadContextVariables(event) {
+  const { headers } = event
+  //Esta variable se usa para generar urls
+  process.env["ORIGIN_HEADER"] = headers.origin
+}
+
+dbConnect().then(() => console.log("Database connected"))
+
+if (isAws) {
+  logger.info("Running in AWS environment")
+  const awsServer = awsServerlessExpress.createServer(server);
+  exports.handler = (event, context) => {
+    logger.debug(`EVENT: ${JSON.stringify(event)}`);
+    loadContextVariables(event)
+    return awsServerlessExpress.proxy(awsServer, event, context, 'PROMISE').promise;
+  };
+} else {
+  const port = 3001;
+  logger.info(`Running in local environment at http://localhost:${port}`)
+  server.listen(3001)
+}
+
+
+
+
+
