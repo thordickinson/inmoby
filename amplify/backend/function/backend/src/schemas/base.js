@@ -10,59 +10,61 @@ const PointSchema = new mongoose.Schema({
         type: [Number],
         required: true
     }
-});
+}, { _id: false, versionKey: false });
 
 const PriceSchema = new mongoose.Schema({
     currency: String,
     value: Number
-})
+}, { _id: false, versionKey: false })
 
 const MediaSchema = new mongoose.Schema({
     type: String,
     url: String
-})
+}, { _id: false, versionKey: false })
 
 const ThemeSchema = new mongoose.Schema({
     mainColor: String,
     accentColor: String,
     params: {}
-})
+}, { _id: false, versionKey: false })
 
 const ContactElementSchema = new mongoose.Schema({
     type: String,
     value: String
-})
+}, { _id: false, versionKey: false })
 
 const ContactSchema = new mongoose.Schema({
     mainContact: String,
     elements: [ContactElementSchema]
-})
+}, { _id: false, versionKey: false })
 
 const AgencySchema = new mongoose.Schema({
-    name: String,
+    name: { type: String, required: true },
     logoUrl: String,
-    key: { type: String },
+    key: { type: String, index: true, required: true, unique: true },
     mainLine: String,
     theme: { type: ThemeSchema },
+    createdAt: { type: Date, default: () => new Date() },
     contact: ContactSchema
-})
+}, { versionKey: false })
 
 const AgentSchema = new mongoose.Schema({
-    name: String,
+    name: { type: String },
     agency: { type: mongoose.Types.ObjectId, ref: "Agency" },
-    contact: ContactSchema
-})
+    contact: ContactSchema,
+}, { versionKey: false })
 
 const PropertySchema = new mongoose.Schema({
+    agency: { type: mongoose.Types.ObjectId, ref: "Agency", index: true },
     title: String,
     description: String,
     agents: [AgentSchema],
     features: {},
     location: {},
-    coordinates: { type: PointSchema },
+    coordinates: { type: PointSchema, required: false },
     images: [String],
     media: [MediaSchema],
-    prices: { type: Map, of: PriceSchema }
+    prices: { type: Map, of: [PriceSchema] }
 })
 
 const AgencyModel = mongoose.models.AgencyModel || mongoose.model("AgencyModel", AgencySchema, "agencies")
