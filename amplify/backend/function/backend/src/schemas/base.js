@@ -55,7 +55,8 @@ const AgentSchema = new mongoose.Schema({
 }, { versionKey: false })
 
 const PropertySchema = new mongoose.Schema({
-    agency: { type: mongoose.Types.ObjectId, ref: "Agency", index: true },
+    agency: { type: mongoose.Types.ObjectId, ref: "AgencyModel", index: true },
+    active: { type: Boolean, default: true },
     title: String,
     description: String,
     agents: [AgentSchema],

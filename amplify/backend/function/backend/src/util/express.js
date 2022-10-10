@@ -72,7 +72,7 @@ async function logError(message, exception) {
     log.error(message, exception)
     const botId = `5142795790:AAHYacckFzg23gNb0o6Vy57BT6QCmxRrizY`
     const chatId = -728635482
-    await sendException(botId, chatId, message, exception)
+    //await sendException(botId, chatId, message, exception)
 }
 
 function addCacheHeader(res, timeInMinutes, isPrivate) {

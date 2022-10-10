@@ -4,7 +4,7 @@ const { findDealerByKey } = require("./service")
 
 
 const AgencyParamsSchema = joi.object({
-    key: joi.string().required().length(24)
+    key: joi.string().required().min(3).max(32)
 })
 
 async function handleGetAgencyByKey(req, res) {
@@ -14,4 +14,3 @@ async function handleGetAgencyByKey(req, res) {
 }
 
 module.exports = { handleGetAgencyByKey }
-
