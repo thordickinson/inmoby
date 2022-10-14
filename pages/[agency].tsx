@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import Layout from "../../components/layout/layout";
-import { makeQuery } from "../../util/fetch";
+import Layout from "../components/layout/layout";
+import { makeQuery } from "../util/fetch";
 
 /**
  * https://demo17.houzez.co/
