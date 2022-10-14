@@ -1,38 +1,37 @@
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-} from "next/document";
+import { Html, Head, Main, NextScript } from "next/document";
 
-class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
-  }
+export default function Document() {
+  return (
+    <Html>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="keywords"
+          content="advanced custom search, agency, agent, business, clean, 
+corporate, directory, google maps, homes, idx agent, listing properties, membership packages, property, real broker, real estate, real estate agent, real estate agency, realtor"
+        />
+        <meta
+          name="description"
+          content="FindHouse - Real Estate HTML Template"
+        />
+        <meta name="CreativeLayers" content="ATFN" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
 
-  render() {
-    return (
-      <Html lang="en">
-        <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,300&display=swap"
-            rel="stylesheet"
-          />
-          <meta
-            name="description"
-            content="Landingpage VPN LaslesVPN Best VPN For Privacy, Country and Cheapest"
-          />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+        <link
+          href="/images/favicon.ico"
+          sizes="128x128"
+          rel="shortcut icon"
+          type="image/x-icon"
+        />
+        <link href="/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }
-
-export default MyDocument;

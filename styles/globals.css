@@ -1,20 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("../public/css/style.css");
+@import url("../public/css/responsive.css");
+@import url("../public/css/bootstrap.min.css");
+@import url("../public/css/flaticon.css");
+@import url("../public/css/megadropdown.css");
+@import url("../public/css/bootstrap-select.min.css");
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Nunito-Sans, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
-    font-size: 16px !important;
-    background-color: #f8f8f8 !important;
-    font-weight: 400 !important;
-    line-height: 25px !important;
-    text-align: left !important;
-    text-transform: none !important;
-    /*TODO: style ant design instead of using important*/
-  }
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
 
 a {
   color: inherit;
@@ -25,12 +21,20 @@ a {
   box-sizing: border-box;
 }
 
-.container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
 }
-.content {
-  max-width: 1296px;
-  width: 100%;
+
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
 }
