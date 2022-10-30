@@ -1,9 +1,9 @@
-@import url("../public/css/style.css");
 @import url("../public/css/responsive.css");
 @import url("../public/css/bootstrap.min.css");
 @import url("../public/css/flaticon.css");
 @import url("../public/css/megadropdown.css");
 @import url("../public/css/bootstrap-select.min.css");
+@import url("../public/css/style.css");
 html,
 body {
   padding: 0;
@@ -37,4 +37,7 @@ a {
 
 .embla__container {
   display: flex;
+}
+.logo1 {
+  height: 55px;
 }

@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { ThemeContext } from "../../common/theme";
+
 export default function PropertyListItem() {
+  const theme = useContext(ThemeContext);
+  const primaryColor = theme.getPrimaryColor();
+  const textColor = primaryColor.clone();
+
   return (
     <div className="col-lg-12">
       <div className="feat_property list">
@@ -30,7 +37,10 @@ export default function PropertyListItem() {
                 <li className="list-inline-item">
                   <a href="#">For Rent</a>
                 </li>
-                <li className="list-inline-item">
+                <li
+                  className="list-inline-item"
+                  style={{ backgroundColor: primaryColor.toHexString() }}
+                >
                   <a href="#">Featured</a>
                 </li>
               </ul>
@@ -38,7 +48,9 @@ export default function PropertyListItem() {
                 $13,000<small>/mo</small>
               </a>
             </div>
-            <p className="text-thm">Apartment</p>
+            <p className="text-thm" style={{ color: textColor.toHexString() }}>
+              Apartment
+            </p>
             <h4>House on the Hollywood</h4>
             <p>
               <span className="flaticon-placeholder"></span> 1421 San Pedro St,

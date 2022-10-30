@@ -1,6 +1,7 @@
 const { AgencyModel, PropertyModel } = require("./schemas/base")
 const dbConnect = require("./util/dbConnect")
-const { randImage, hashedId, randomText, randElement, randPhone, randEmail, randWord, randInt } = require('./util/random')
+const dotenv = require("dotenv")
+const { randImage, hashedId, randomText, randElement, randPhone, randEmail, randWord, randInt, randEnumerable } = require('./util/random')
 
 function generateKey(name) {
     return name.toLowerCase().replace(/ /g, "_")
@@ -11,6 +12,7 @@ const colors = ["#F44336", "#E91E63", "#9C27B0", "#673AB7",
     "#CDDC39", "#FFEB3B", "#FFC107", "#FF9800", "#FF5722", "#795548", "#9E9E9E"]
 const domains = ["gmail.com", "outlook.com", "yahoo.com"]
 const contactTypes = ["whatsapp", "email", "phone", "facebook", "twitter", "instagram"]
+const propertyTypes = ["apartamento", "casa", "lote", "local"]
 
 const AgencyNames = ["Inmofacil", "Inmobiliaria Villegas", "Tu Casa",
     "Habi", "Cáceres Inmobiliaria", "Inmovivir Ltda"]
@@ -26,10 +28,10 @@ function randContact() {
 }
 
 function randTheme() {
-    const mainColor = randElement(colors)
-    const accentColor = randElement(colors)
+    const primaryColor = randElement(colors)
+    const secondaryColor = randElement(colors)
     return {
-        mainColor, accentColor, params: {}
+        primaryColor, secondaryColor, params: {}
     }
 }
 
@@ -60,6 +62,7 @@ function randPrice() {
 
 function generateProperty(agencyId) {
     const title = randomText(5, 20)
+    const type = randElement(propertyTypes)
     const description = randomText(20, 500)
     const images = Array.from(Array(randInt(10) + 5).keys()).map(_ => randImage(600, 400))
     const features = {
@@ -77,7 +80,7 @@ function generateProperty(agencyId) {
         "country": "co", "state": "cundinamarca",
         "city": "bogota", "sector": "engativa", "neighborhood": "Gran granada"
     }
-    return { agency: agencyId, title, description, images, features, location, prices }
+    return { agency: agencyId, type, title, description, images, features, location, prices }
 }
 
 
@@ -95,11 +98,21 @@ async function insertAgencies() {
 
 
 async function seed() {
-    process.env['MONGODB_URI'] = "mongodb://inmoby:inmoby@thordickinson.ddns.net:7014/inmoby"
+    dotenv.config()
+    console.log(process.env["MONGODB_URI"])
     await dbConnect()
     await insertAgencies()
 }
 
+/*
+db.createUser(
+  {
+    user: "inmoby",
+    pwd: "inmoby",
+    roles: [ { role: "readWrite", db: "inmoby" } ]
+  }
+)
+*/
 
 seed().then(() => {
     process.exit(0)

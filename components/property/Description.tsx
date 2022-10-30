@@ -1,75 +1,72 @@
-export default function Description() {
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../common/theme";
+import { Property } from "../../model/agency";
+
+interface DescriptionParams {
+  property: Property;
+}
+
+function trimString(text: string, maxLength: number): string | undefined {
+  if (!text) return undefined;
+  if (text.length > maxLength) return text.substring(0, maxLength - 3) + "...";
+  return text;
+}
+
+export default function Description({ property }: DescriptionParams) {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const rooms = property.features["rooms"];
+  const baths = property.features["baths"];
+  const builtArea = property.features["builtArea"];
+  const theme = useContext(ThemeContext);
+  const descToggleStyle = { color: theme.getPrimaryColor().toHexString() };
+  const description = showFullDescription
+    ? property.description
+    : trimString(property.description, 512);
   return (
     <div className="col-lg-12">
       <div className="listing_single_description">
         <div className="lsd_list">
           <ul className="mb0">
             <li className="list-inline-item">
-              <a href="#">Apartment</a>
+              <a href="#">{property.type}</a>
             </li>
-            <li className="list-inline-item">
-              <a href="#">Beds: 4</a>
-            </li>
-            <li className="list-inline-item">
-              <a href="#">Baths: 2</a>
-            </li>
-            <li className="list-inline-item">
-              <a href="#">Sq Ft: 5280</a>
-            </li>
+            {rooms && (
+              <li className="list-inline-item">
+                <a href="#">Habitaciones: {rooms}</a>
+              </li>
+            )}
+            {baths && (
+              <li className="list-inline-item">
+                <a href="#">Baños: {baths}</a>
+              </li>
+            )}
+            {builtArea && (
+              <li className="list-inline-item">
+                <a href="#">Área construida: {builtArea} m²</a>
+              </li>
+            )}
           </ul>
         </div>
-        <h4 className="mb30">Description</h4>
-        <p className="mb25">
-          Evans Tower very high demand corner junior one bedroom plus a large
-          balcony boasting full open NYC views. You need to see the views to
-          believe them. Mint condition with new hardwood floors. Lots of closets
-          plus washer and dryer.
-        </p>
-        <p className="gpara second_para white_goverlay mt10 mb10">
-          Fully furnished. Elegantly appointed condominium unit situated on
-          premier location. PS6. The wide entry hall leads to a large living
-          room with dining area. This expansive 2 bedroom and 2 renovated marble
-          bathroom apartment has great windows. Despite the interior views, the
-          apartments Southern and Eastern exposures allow for lovely natural
-          light to fill every room. The master suite is surrounded by
-          handcrafted milkwork and features incredible walk-in closet and
-          storage space.
-        </p>
-        <div className="collapse" id="collapseExample">
-          <div className="card card-body">
-            <p className="mt10 mb10">
-              Fully furnished. Elegantly appointed condominium unit situated on
-              premier location. PS6. The wide entry hall leads to a large living
-              room with dining area. This expansive 2 bedroom and 2 renovated
-              marble bathroom apartment has great windows. Despite the interior
-              views, the apartments Southern and Eastern exposures allow for
-              lovely natural light to fill every room. The master suite is
-              surrounded by handcrafted milkwork and features incredible walk-in
-              closet and storage space.
-            </p>
-            <p className="mt10 mb10">
-              Fully furnished. Elegantly appointed condominium unit situated on
-              premier location. PS6. The wide entry hall leads to a large living
-              room with dining area. This expansive 2 bedroom and 2 renovated
-              marble bathroom apartment has great windows. Despite the interior
-              views, the apartments Southern and Eastern exposures allow for
-              lovely natural light to fill every room. The master suite is
-              surrounded by handcrafted milkwork and features incredible walk-in
-              closet and storage space.
-            </p>
-          </div>
-        </div>
+        <h4 className="mb30">Descripción</h4>
+        <p className="mb25">{description}</p>
         <p className="overlay_close">
-          <a
+          <span
+            style={descToggleStyle}
+            onClick={() => setShowFullDescription(!showFullDescription)}
             className="text-thm fz14"
-            data-toggle="collapse"
-            href="#collapseExample"
             role="button"
             aria-expanded="false"
             aria-controls="collapseExample"
           >
-            Show More <span className="flaticon-download-1 fz12"></span>
-          </a>
+            Mostrar {showFullDescription ? "menos" : "más"}{" "}
+            <i
+              className={
+                (showFullDescription
+                  ? "flaticon-upload"
+                  : "flaticon-download-1") + " fz12"
+              }
+            ></i>
+          </span>
         </p>
       </div>
     </div>

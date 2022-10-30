@@ -5127,7 +5127,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  min-width: 360px;
+  /*min-width: 360px;*/
 }
 
 .feat_property:hover {
@@ -8242,11 +8242,13 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
 }
 
 .footer_one {
-  background-color: #24324a;
+  /*background-color: #24324a;*/
+    background-color: #303030;
 }
 
 .footer_middle_area {
-  background-color: #1d293e;
+  /*background-color: #1d293e;*/
+    background-color: #222;
 }
 
 .footer_bottom_area {
@@ -15300,7 +15302,7 @@ legend span {
 }
 
 .text-thm {
-  color: #ff5a5f !important;
+  color: #ff5a5f;
 }
 
 .hvr-text-thm:hover {

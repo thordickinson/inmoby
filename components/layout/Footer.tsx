@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { AgencyContext } from "../../common/contexts";
+import tinycolor from "tinycolor2";
+
 export default function Footer() {
+  const agency = useContext(AgencyContext);
+  const { theme } = agency;
+
   return (
     <>
       <section className="footer_one">

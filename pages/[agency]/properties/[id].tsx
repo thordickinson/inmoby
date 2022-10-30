@@ -20,8 +20,27 @@ import ReviewsList from "../../../components/property/ReviewList";
 import ReviewForm from "../../../components/property/ReviewForm";
 import SimilarProperties from "../../../components/property/SimilarProperties";
 import Gallery from "../../../components/property/Gallery";
+import { useRouter } from "next/router";
+import { useQuery } from "react-query";
+import { makeQuery } from "../../../utils/misc";
+import Preload from "../../../components/layout/Preload";
+import { Property } from "../../../model/agency";
 
 export default function PropertyPage() {
+  const router = useRouter();
+  const { id, agency } = router.query;
+  console.log(router.query);
+  const query = useQuery([], makeQuery(`/api/v1/properties/${id}`), {
+    enabled: !!id,
+  });
+
+  if (!router.isReady || query.isLoading) return <Preload></Preload>;
+  if (!id) {
+    router.push(`/${agency}`);
+    return <Preload></Preload>;
+  }
+  const property: Property = query.data;
+  console.log(property);
   return (
     <>
       <AgencyLayout>
@@ -31,7 +50,7 @@ export default function PropertyPage() {
             <div className="row">
               <div className="col-md-12 col-lg-8">
                 <div className="row">
-                  <Description></Description>
+                  <Description property={property}></Description>
                   <Details></Details>
                   <ExtraDetails></ExtraDetails>
                   <Attachments></Attachments>

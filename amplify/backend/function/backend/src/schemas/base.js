@@ -23,8 +23,8 @@ const MediaSchema = new mongoose.Schema({
 }, { _id: false, versionKey: false })
 
 const ThemeSchema = new mongoose.Schema({
-    mainColor: String,
-    accentColor: String,
+    primaryColor: String,
+    secondaryColor: String,
     params: {}
 }, { _id: false, versionKey: false })
 
@@ -57,6 +57,7 @@ const AgentSchema = new mongoose.Schema({
 const PropertySchema = new mongoose.Schema({
     agency: { type: mongoose.Types.ObjectId, ref: "AgencyModel", index: true },
     active: { type: Boolean, default: true },
+    type: { type: String },
     title: String,
     description: String,
     agents: [AgentSchema],

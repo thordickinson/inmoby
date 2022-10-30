@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../common/theme";
 
 const CarouselItemStyle: React.CSSProperties = {
   width: "338px",
@@ -11,6 +12,9 @@ const OwlStage = {
 };
 
 export default function PropertyGridItem() {
+  const theme = useContext(ThemeContext);
+  const primary = theme.getPrimaryColor();
+
   const featuredLink = "";
   return (
     <div className="feat_property">
@@ -21,7 +25,10 @@ export default function PropertyGridItem() {
             <li className="list-inline-item">
               <a href="#">For Rent</a>
             </li>
-            <li className="list-inline-item">
+            <li
+              className="list-inline-item"
+              style={{ backgroundColor: primary.toHexString() }}
+            >
               <a href="#">Featured</a>
             </li>
           </ul>

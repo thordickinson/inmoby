@@ -1,6 +1,6 @@
 export interface Theme {
-    mainColor: string
-    accentColor: string
+    primaryColor: string
+    secondaryColor: string
 }
 
 export interface Agency {
@@ -24,6 +24,7 @@ export interface Price {
 export interface Property {
     _id: string
     title: string
+    type: string
     active: boolean
     agency: Agency
     agents: Agent[]

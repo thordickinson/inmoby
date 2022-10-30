@@ -1,4 +1,12 @@
+import { useContext } from "react";
+import { ThemeContext } from "../../common/theme";
+
 export default function FeaturedSidebarElement() {
+  const theme = useContext(ThemeContext);
+  const primaryColor = theme.getPrimaryColor();
+  const primaryHex = primaryColor.toHexString();
+  let textColor = primaryColor.clone();
+
   return (
     <div className="item">
       <div className="feat_property home7 agent">
@@ -10,10 +18,16 @@ export default function FeaturedSidebarElement() {
           />
           <div className="thmb_cntnt">
             <ul className="tag mb0">
-              <li className="list-inline-item">
+              <li
+                className="list-inline-item"
+                style={{ color: textColor.toHexString() }}
+              >
                 <a href="#">For Rent</a>
               </li>
-              <li className="list-inline-item">
+              <li
+                className="list-inline-item"
+                style={{ backgroundColor: primaryHex }}
+              >
                 <a href="#">Featured</a>
               </li>
             </ul>
